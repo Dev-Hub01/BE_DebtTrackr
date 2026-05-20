@@ -1,0 +1,76 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="002-create-transaction-records" author="suresh">
+
+        <createTable tableName="transaction_records">
+
+            <column name="transaction_id" type="VARCHAR(30)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="person_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="payment_detail_id" type="BIGINT"/>
+
+            <column name="type" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="amount" type="DECIMAL(15,2)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="amount_repaid" type="DECIMAL(15,2)" defaultValueNumeric="0"/>
+
+            <column name="interest_rate" type="DECIMAL(5,2)" defaultValueNumeric="0"/>
+
+            <column name="transaction_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="due_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="extended_due_date" type="DATE"/>
+
+            <column name="status" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="reminder_sent" type="bit" />
+
+            <column name="reminder_count" type="INT" defaultValueNumeric="0"/>
+
+            <column name="last_reminder_sent_at" type="TIMESTAMP"/>
+
+            <column name="purpose" type="VARCHAR(255)"/>
+
+            <column name="remarks" type="VARCHAR(2000)"/>
+
+            <column name="active" type="bit" />
+
+            <column name="created_at" type="TIMESTAMP"/>
+
+            <column name="updated_at" type="TIMESTAMP"/>
+
+        </createTable>
+
+        <!-- Foreign Keys -->
+        <addForeignKeyConstraint
+                baseTableName="transaction_records"
+                baseColumnNames="person_id"
+                referencedTableName="person"
+                referencedColumnNames="id"
+                constraintName="fk_transaction_person"/>
+
+    </changeSet>
+
+</databaseChangeLog>

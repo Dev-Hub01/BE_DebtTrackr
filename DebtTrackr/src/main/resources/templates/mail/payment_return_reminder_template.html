@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>DebtTrackr - Payment Reminder</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .email-wrapper {
+            max-width: 700px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+
+        /* HEADER */
+        .header {
+            background: #1a1a2e;
+            padding: 20px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #e53935;
+        }
+
+        /* BODY */
+        .body {
+            padding: 20px;
+        }
+
+        .greeting {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+        }
+        .greeting span {
+            color: #e53935;
+        }
+
+        .intro {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        /* TABLE FIXED */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; /* 🔥 IMPORTANT FIX */
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            font-size: 13px;
+            text-align: left;
+
+            word-break: break-word;
+            white-space: normal;
+        }
+
+        th {
+            background: #e53935;
+            color: white;
+        }
+
+        /* SPECIAL CELLS */
+        .txn-id {
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        .remarks {
+            font-style: italic;
+            color: #666;
+        }
+
+        .amount {
+            font-weight: bold;
+        }
+
+        .pending {
+            color: red;
+        }
+
+        /* TOTAL */
+        .total-box {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #e53935;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #1a1a2e;
+            color: #ccc;
+            padding: 20px;
+            font-size: 13px;
+        }
+
+        .footer strong {
+            color: white;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="email-wrapper">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">Debt<span>Trackr</span></div>
+        <div>Payment Reminder</div>
+    </div>
+
+    <!-- BODY -->
+    <div class="body">
+
+        <!-- Greeting -->
+        <div class="greeting">
+            Hello, <span th:text="${name}">Friend</span>
+        </div>
+
+        <div class="intro">
+            You have pending transactions. Please review and clear them at your earliest convenience.
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>Txn ID</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Paid</th>
+                    <th>Pending</th>
+                    <th>Due Date</th>
+                    <th>Remarks</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="item : ${transactions}">
+                    <td class="txn-id" th:text="${item.transactionId}"></td>
+                    <td th:text="${item.tnxDate}"></td>
+                    <td class="amount">₹<span th:text="${item.totalAmount}"></span></td>
+                    <td>₹<span th:text="${item.amountPaid}"></span></td>
+                    <td class="pending">₹<span th:text="${item.balanceAmount}"></span></td>
+                    <td th:text="${item.dueDate}"></td>
+                    <td class="remarks" th:text="${item.remarks}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TOTAL -->
+        <div class="total-box">
+            Total Pending: ₹<span th:text="${totalDue}"></span>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>Best Regards,</p>
+        <p><strong th:text="${ownerName}">Suresh</strong></p>
+        <p>DebtTrackr - Smart Debt Management</p>
+
+        <p style="margin-top:10px; font-size:11px;">
+            This is an automated reminder. Please ignore if already paid.
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="004-create-transaction-logs" author="suresh">
+
+        <createTable tableName="transaction_logs">
+
+            <!-- Primary Key -->
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <!-- Reference to any entity (transaction / payment / etc.) -->
+            <column name="entity_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <!-- Operation Type (ENUM as STRING) -->
+            <column name="operation_type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <!-- Action -->
+            <column name="action" type="VARCHAR(100)"/>
+
+            <!-- Status Tracking -->
+            <column name="previous_status" type="VARCHAR(50)"/>
+            <column name="new_status" type="VARCHAR(50)"/>
+
+            <!-- Amount -->
+            <column name="amount" type="DECIMAL(15,2)"/>
+
+            <!-- Remarks -->
+            <column name="remarks" type="VARCHAR(1000)"/>
+
+            <!-- Trigger Info -->
+            <column name="triggered_by" type="VARCHAR(50)"/>
+
+            <!-- Email Tracking -->
+            <column name="email_sent_at" type="TIMESTAMP"/>
+
+            <!-- Audit -->
+            <column name="created_at" type="TIMESTAMP"/>
+
+        </createTable>
+
+<!--        &lt;!&ndash; Index for faster lookup by entity &ndash;&gt;-->
+<!--        <createIndex tableName="transaction_logs" indexName="idx_txn_log_entity_id">-->
+<!--            <column name="entity_id"/>-->
+<!--        </createIndex>-->
+
+        <!-- Optional: index for operation type -->
+<!--        <createIndex tableName="transaction_logs" indexName="idx_txn_log_operation">-->
+<!--            <column name="operation_type"/>-->
+<!--        </createIndex>-->
+
+    </changeSet>
+
+</databaseChangeLog>

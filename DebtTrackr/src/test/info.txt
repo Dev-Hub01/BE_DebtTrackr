@@ -1,0 +1,5 @@
+1. Create Person ✅
+2. Create Transaction 🔥 (NEXT)
+3. Make Payment (FIFO)
+4. Track Logs
+5. Send Reminders

@@ -1,0 +1,78 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="001-create-payment-details" author="suresh">
+        <createTable tableName="payment_details">
+
+            <!-- 🔑 Primary Key -->
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <!-- 🔗 Person -->
+<!--            <column name="person_id" type="BIGINT">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+
+            <!-- 🔗 Transaction -->
+            <column name="transaction_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <!-- 💰 Amount -->
+            <column name="amount" type="DECIMAL(15,2)">
+                <constraints nullable="false"/>
+            </column>
+
+            <!-- 💳 Payment Mode -->
+            <column name="payment_mode" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <!-- 🧾 Payment Reference -->
+            <column name="payment_reference" type="VARCHAR(100)"/>
+
+            <!-- 🏦 Identifier (UPI / Account) -->
+            <column name="payment_identifier" type="VARCHAR(100)"/>
+
+            <!-- 🏢 Provider -->
+            <column name="provider" type="VARCHAR(100)"/>
+
+            <!-- 📅 Payment Date -->
+            <column name="payment_date" type="TIMESTAMP"/>
+
+            <!-- 📝 Remarks -->
+            <column name="remarks" type="VARCHAR(255)"/>
+
+            <!-- ⏱ Audit -->
+            <column name="created_at" type="TIMESTAMP"/>
+
+        </createTable>
+
+        <!-- Foreign Key -->
+<!--        <addForeignKeyConstraint-->
+<!--                baseTableName="payment_details"-->
+<!--                baseColumnNames="person_id"-->
+<!--                referencedTableName="person"-->
+<!--                referencedColumnNames="id"-->
+<!--                constraintName="fk_payment_person"/>-->
+
+
+
+            <!-- FK to Transaction -->
+            <addForeignKeyConstraint
+                    baseTableName="payment_details"
+                    baseColumnNames="transaction_id"
+                    referencedTableName="transaction_records"
+                    referencedColumnNames="transaction_id"
+                    constraintName="fk_payment_transaction"/>
+
+
+    </changeSet>
+
+
+
+</databaseChangeLog>

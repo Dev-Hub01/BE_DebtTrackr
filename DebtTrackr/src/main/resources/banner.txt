@@ -1,0 +1,10 @@
+${AnsiColor.GREEN}██████╗ ███████╗██████╗ ████████╗${AnsiColor.CYAN}████████╗██████╗  █████╗  ██████╗██╗  ██╗██████╗
+${AnsiColor.GREEN}██╔══██╗██╔════╝██╔══██╗╚══██╔══╝${AnsiColor.CYAN}╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔══██╗
+${AnsiColor.GREEN}██║  ██║█████╗  ██████╔╝   ██║   ${AnsiColor.CYAN}   ██║   ██████╔╝███████║██║     █████╔╝ ██████╔╝
+${AnsiColor.GREEN}██║  ██║██╔══╝  ██╔══██╗   ██║   ${AnsiColor.CYAN}   ██║   ██╔══██╗██╔══██║██║     ██╔═██╗ ██╔══██╗
+${AnsiColor.GREEN}██████╔╝███████╗██████╔╝   ██║   ${AnsiColor.CYAN}   ██║   ██║  ██║██║  ██║╚██████╗██║  ██╗██║  ██║
+${AnsiColor.GREEN}╚═════╝ ╚══════╝╚═════╝    ╚═╝   ${AnsiColor.CYAN}   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝
+
+${AnsiColor.BRIGHT_MAGENTA}${AnsiStyle.BOLD}:: DebtTrackr ::${AnsiStyle.NORMAL}${AnsiColor.BRIGHT_BLUE}  Smart Debt Management System
+${AnsiColor.WHITE}:: Running Spring Boot ${spring-boot.version} :: Profile: ${spring.profiles.active} ::
+${AnsiColor.DEFAULT}

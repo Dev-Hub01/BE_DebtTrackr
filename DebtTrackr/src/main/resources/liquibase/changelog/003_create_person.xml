@@ -1,0 +1,59 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="001-create-person" author="suresh">
+
+        <createTable tableName="person">
+
+            <!-- Primary Key -->
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <!-- Basic Info -->
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="contact_number" type="VARCHAR(20)"/>
+
+            <!-- Address -->
+            <column name="address" type="VARCHAR(500)"/>
+            <column name="city" type="VARCHAR(100)"/>
+            <column name="state" type="VARCHAR(100)"/>
+            <column name="country" type="VARCHAR(100)"/>
+
+            <!-- Relation -->
+            <column name="relation" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <!-- Notes -->
+            <column name="notes" type="VARCHAR(2000)"/>
+
+            <!-- Status -->
+            <column name="active" type="bit" />
+
+            <!-- Audit -->
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="updated_at" type="TIMESTAMP"/>
+
+        </createTable>
+
+        <!-- Optional: Unique constraint for email -->
+        <addUniqueConstraint
+                tableName="person"
+                columnNames="email"
+                constraintName="uk_person_email"/>
+
+    </changeSet>
+
+</databaseChangeLog>

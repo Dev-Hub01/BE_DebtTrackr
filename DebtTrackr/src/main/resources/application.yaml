@@ -1,0 +1,83 @@
+spring:
+  application:
+    name: DebtTrackr
+  output:
+    ansi:
+      enabled: NEVER
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/debttrackr_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata
+    username: root
+    password: Suresh@7873
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+
+
+
+
+  # ── Mail (Gmail SMTP) ─────────────────────────
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: your_email@gmail.com    # ← change this
+#    password: your_app_password       # ← change this
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#            required: true
+#          connectiontimeout: 5000
+#          timeout: 5000
+
+
+  # ── App Custom Settings ───────────────────────
+#  debttrackr:
+#    mail:
+#      from: your_email@gmail.com        # ← change this
+#      owner-name: YourName              # ← change this
+#    reminder:
+#      cron: "0 0 9 * * *"
+
+
+
+  liquibase:
+    change-log: classpath:liquibase/master.xml
+
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: beherarajesh93480@gmail.com
+    password: bymrqyyozutrrokw
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: 8989
+  error:
+    include-message: always
+
+
+
+#sms:
+#  msg91:
+#    auth-key: 508313AzGKW6uZnfo169e5fe68P1
+#    flow-id: YOUR_FLOW_ID   # create flow if not yet
+#    sender: DEBTRK

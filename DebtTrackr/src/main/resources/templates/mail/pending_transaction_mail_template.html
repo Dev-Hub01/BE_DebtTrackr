@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th { background-color: #f44336; color: white; padding: 10px; }
+        td { padding: 8px; border-bottom: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+
+<h2>Hello <span th:text="${name}"></span>,</h2>
+
+<p>You have pending payments to return:</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Transaction ID</th>
+        <th>Total Amount</th>
+        <th>Pending Amount</th>
+        <th>Due Date</th>
+        <th>Remarks</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="item : ${transactions}">
+        <td th:text="${item.transactionId}"></td>
+        <td th:text="${item.totalAmount}"></td>
+        <td th:text="${item.balanceAmount}"></td>
+        <td th:text="${item.dueDate}"></td>
+        <td th:text="${item.remarks}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<p style="color:red; font-weight:bold;">
+    Total Pending Amount: ₹ <span th:text="${totalDue}"></span>
+</p>
+
+</body>
+</html>

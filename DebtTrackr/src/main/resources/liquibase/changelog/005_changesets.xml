@@ -1,0 +1,36 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <changeSet id="remove-payment-details-id" author="suresh">
+
+        <!-- Step 1: Drop FK -->
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyName="fk_transaction_payment"/>
+        </preConditions>
+
+        <dropForeignKeyConstraint
+                baseTableName="transaction_records"
+                constraintName="fk_transaction_payment"/>
+
+        <dropColumn
+                tableName="transaction_records"
+                columnName="payment_detail_id"/>
+
+    </changeSet>
+
+
+
+    <changeSet id="add-column-person-id" author="suresh">
+        <addColumn tableName="payment_details">
+            <column name="person_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+
+
+
+</databaseChangeLog>
