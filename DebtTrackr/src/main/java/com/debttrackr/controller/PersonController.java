@@ -38,4 +38,10 @@ public class PersonController {
         return ResponseEntity.ok(personService.createPersons(List.of(request)));
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<PersonDTO> updatePerson(@RequestBody PersonDTO request) {
+        log.info("Rest request to update a person id {} name {}", request.getId(), request.getName());
+        return ResponseEntity.ok(personService.updatePerson(request));
+    }
+
 }

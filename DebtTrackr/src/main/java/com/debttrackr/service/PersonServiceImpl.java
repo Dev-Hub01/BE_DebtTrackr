@@ -36,6 +36,13 @@ public class PersonServiceImpl implements PersonService {
 
     }
 
+    @Override
+    public PersonDTO updatePerson(PersonDTO request) {
+        Person p = personMapper.toEntity(request);
+        Person saved = personRepo.save(p);
+        return personMapper.toDto(saved);
+    }
+
 //    private PersonDTO mapToResponse(Person p) {
 //        return PersonDTO.builder()
 //                .name(p.getName())

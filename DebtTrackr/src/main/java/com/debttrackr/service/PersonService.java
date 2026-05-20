@@ -7,4 +7,6 @@ import java.util.List;
 public interface PersonService {
     List<PersonDTO> createPersons(List<PersonDTO> requests);
     List<PersonDTO> getAllPerson();
+    PersonDTO updatePerson(PersonDTO request);
+
 }
