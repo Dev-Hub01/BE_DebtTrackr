@@ -12,7 +12,7 @@ public interface TransactionMapper {
 
     TransactionRecord toEntity (TransactionResponse dto);
     List<TransactionRecord> toEntityList (List<TransactionResponse> transactionResponses);
-    @Mapping(target = "personName", source = "person.name")
+//    @Mapping(target = "personName", source = "person.name")
     TransactionResponse toDto (TransactionRecord transactionRecord);
     List<TransactionResponse> toDtoList (List<TransactionRecord> transactionRecords);
 }

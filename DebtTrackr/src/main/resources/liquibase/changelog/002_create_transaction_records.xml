@@ -73,4 +73,18 @@
 
     </changeSet>
 
+
+
+    <changeSet id="5678987678-1" author="suresh">
+        <addColumn tableName="transaction_records">
+            <column name="transaction_no" type="VARCHAR(40)"/>
+
+            <column name="payment_mode" type="VARCHAR(20)"/>
+            <column name="from_person_id" type="BIGINT" />
+            <column name="to_person_id" type="BIGINT"/>
+            <column name="category" type="VARCHAR(30)"/>
+
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

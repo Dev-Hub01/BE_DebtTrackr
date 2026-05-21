@@ -33,12 +33,14 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public TransactionResponse createTransaction(TransactionRequest request) {
 
-        Person person = personRepo.findById(request.getPersonId())
-                .orElseThrow(() -> new RuntimeException("Person not found"));
+
+
+//        Person person = personRepo.findById(request.getPersonId())
+//                .orElseThrow(() -> new RuntimeException("Person not found"));
 
         TransactionRecord txn = new TransactionRecord();
         txn.setTransactionId(IdGenerator.generateId()); // your TXID logic
-        txn.setPerson(person);
+//        txn.setPerson(person);
         txn.setAmount(request.getAmount());
         txn.setAmountRepaid(BigDecimal.ZERO);
         txn.setTransactionDate(LocalDate.now());
@@ -46,6 +48,11 @@ public class TransactionServiceImpl implements TransactionService {
         txn.setType(request.getType());
         txn.setStatus(TransactionStatus.PENDING);
         txn.setReminderCount(1);
+        txn.setPaymentMode(request.getPaymentMode());
+        txn.setCategory(request.getCategory());
+        txn.setTransactionNo(request.getTransactionNo());
+        txn.setFromPersonId(request.getFromPersonId());
+        txn.setToPersonId(request.getToPersonId());
 
         TransactionRecord transactionRecord = transactionRepo.save(txn);
         TransactionResponse transactionResponse = transactionMapper.toDto(transactionRecord);
@@ -63,9 +70,9 @@ public class TransactionServiceImpl implements TransactionService {
 
         logRepo.save(log);
 
-        if(request.isMailReq()){
+//        if(request.isMailReq()){
           emailService.notifyTransaction(transactionResponse);
-        }
+//        }
 
         return mapToResponse(txn);
     }
@@ -134,8 +141,8 @@ public class TransactionServiceImpl implements TransactionService {
 
         return TransactionResponse.builder()
                 .transactionId(txn.getTransactionId())
-                .personId(txn.getPerson().getId())
-                .personName(txn.getPerson().getName())
+//                .personId(txn.getPerson().getId())
+//                .personName(txn.getPerson().getName())
                 .amount(txn.getAmount())
                 .amountRepaid(txn.getAmountRepaid())
                 .balanceAmount(txn.getBalanceAmount())

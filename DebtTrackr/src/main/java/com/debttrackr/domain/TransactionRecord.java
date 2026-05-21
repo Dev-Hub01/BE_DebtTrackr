@@ -1,5 +1,7 @@
 package com.debttrackr.domain;
 
+import com.debttrackr.domain.enumeration.Category;
+import com.debttrackr.domain.enumeration.PaymentMode;
 import com.debttrackr.domain.enumeration.TransactionStatus;
 import com.debttrackr.domain.enumeration.TransactionType;
 import jakarta.persistence.Entity;
@@ -29,8 +31,8 @@ public class TransactionRecord {
 
     // ── WHO ─────────────────────────────────────
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "person_id", nullable = false)
-    private Person person;
+   @JoinColumn(name = "person_id")
+   private Person person;
 
     // ── TYPE ────────────────────────────────────
     @Enumerated(EnumType.STRING)
@@ -83,6 +85,26 @@ public class TransactionRecord {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    private String transactionNo;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PaymentMode paymentMode; // UPI, BANK, CASH
+
+    @Column(name = "from_person_id", nullable = false)
+    private Long fromPersonId;
+
+    @Column(name = "to_person_id", nullable = false)
+    private Long toPersonId;
+
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
+
+
+
+
 
     // ── DERIVED METHODS (IMPORTANT) ─────────────
 

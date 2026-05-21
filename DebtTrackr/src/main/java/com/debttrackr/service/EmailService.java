@@ -115,7 +115,7 @@ public class EmailService {
     }
 
 
-
+/* commented may 21
 
     public void sendPendingReminders(Long personId, boolean sendAll) throws MessagingException {
 
@@ -172,7 +172,7 @@ public class EmailService {
         }
     }
 
-
+*/
 
     public void sendReminderEmail(
             String to,

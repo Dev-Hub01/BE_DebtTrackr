@@ -29,10 +29,10 @@ public class EmailController {
         emailService.getPaymentSummaryAndSendEmail(personId);
         return ResponseEntity.ok("Email sent successfully");
     }
-
+// this is what we use
     @PostMapping("/send-reminders")
     public ResponseEntity<String> sendReminders(@RequestParam("personId") Long personId, @RequestParam("sendAll") boolean sendAll) throws MessagingException {
-        emailService.sendPendingReminders(personId, sendAll);
+//        emailService.sendPendingReminders(personId, sendAll);
         return ResponseEntity.ok("Reminders sent");
     }
 

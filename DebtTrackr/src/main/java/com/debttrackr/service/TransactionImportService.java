@@ -57,7 +57,7 @@ public class TransactionImportService {
         TransactionRecord txn = new TransactionRecord();
 
         txn.setTransactionId(IdGenerator.generateId()); // your custom TXID
-        txn.setPerson(person);
+//        txn.setPerson(person);
         txn.setAmount(amount);
         txn.setAmountRepaid(BigDecimal.ZERO);
         txn.setType(type);

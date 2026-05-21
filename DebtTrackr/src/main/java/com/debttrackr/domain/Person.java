@@ -61,4 +61,6 @@ public class Person {
 
     private Boolean active;
 
+   private Long userId;
+
 }
