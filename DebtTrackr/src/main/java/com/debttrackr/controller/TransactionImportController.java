@@ -1,6 +1,7 @@
 package com.debttrackr.controller;
 
 
+import com.debttrackr.domain.enumeration.TransactionType;
 import com.debttrackr.service.TransactionImportService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class TransactionImportController {
     private TransactionImportService transactionImportService;
 
     @PostMapping("/import")
-    public ResponseEntity<String> importCsv(@RequestParam("file") MultipartFile file, @RequestParam Long personId) {
-        transactionImportService.importTransactions(file, personId);
+    public ResponseEntity<String> importCsv(@RequestParam("file") MultipartFile file, @RequestParam Long personId, @RequestParam TransactionType type) {
+        transactionImportService.importTransactions(file, personId, type);
         return ResponseEntity.ok("Transactions imported successfully");
     }
 }

@@ -26,7 +26,7 @@ public class TransactionImportService {
     private final TransactionRepository transactionRepository;
     private final PersonRepository personRepository;
 
-    public void importTransactions(MultipartFile file, Long personId) {
+    public void importTransactions(MultipartFile file, Long personId, TransactionType type) {
 
         Person person = personRepository.findById(personId)
                 .orElseThrow(() -> new RuntimeException("Person not found"));
@@ -36,7 +36,7 @@ public class TransactionImportService {
 
             List<TransactionRecord> transactions = reader.lines()
                     .skip(1) // skip header
-                    .map(line -> mapToTransaction(line, person))
+                    .map(line -> mapToTransaction(line, person, type))
                     .toList();
 
             transactionRepository.saveAll(transactions);
@@ -46,7 +46,7 @@ public class TransactionImportService {
         }
     }
 
-    private TransactionRecord mapToTransaction(String line, Person person) {
+    private TransactionRecord mapToTransaction(String line, Person person, TransactionType type) {
 
         String[] fields = line.split(",");
 
@@ -60,7 +60,7 @@ public class TransactionImportService {
         txn.setPerson(person);
         txn.setAmount(amount);
         txn.setAmountRepaid(BigDecimal.ZERO);
-        txn.setType(TransactionType.LEND);
+        txn.setType(type);
         txn.setStatus(TransactionStatus.PENDING);
         txn.setCreatedAt(date.atStartOfDay());
         txn.setTransactionDate(date);
