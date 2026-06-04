@@ -4,6 +4,7 @@ import com.debttrackr.service.PersonService;
 import com.debttrackr.service.dto.PersonDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +43,12 @@ public class PersonController {
     public ResponseEntity<PersonDTO> updatePerson(@RequestBody PersonDTO request) {
         log.info("Rest request to update a person id {} name {}", request.getId(), request.getName());
         return ResponseEntity.ok(personService.updatePerson(request));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PersonDTO>fetchPersonById(@PathVariable("id") Long id) {
+        log.info("Request to get a person information by id {}", id);
+        return ResponseEntity.ok(personService.getPersonById(id));
     }
 
 }

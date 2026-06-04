@@ -92,11 +92,8 @@ public class TransactionRecord {
     @Column(nullable = false)
     private PaymentMode paymentMode; // UPI, BANK, CASH
 
-    @Column(name = "from_person_id", nullable = false)
-    private Long fromPersonId;
-
-    @Column(name = "to_person_id", nullable = false)
-    private Long toPersonId;
+    @Column(name = "user_id", nullable = false)
+    private Long user_id;
 
     @Enumerated(EnumType.STRING)
     private Category category;

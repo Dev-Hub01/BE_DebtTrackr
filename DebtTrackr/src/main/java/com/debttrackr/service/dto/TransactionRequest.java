@@ -13,8 +13,8 @@ import java.time.LocalDate;
 @Data
 public class TransactionRequest {
 
-    private Long fromPersonId;
-    private Long toPersonId;
+    private Long userId;
+    private Long personId;
     private BigDecimal amount;
     private LocalDate dueDate;
     private LocalDate transactionDate;

@@ -35,12 +35,12 @@ public class TransactionServiceImpl implements TransactionService {
 
 
 
-//        Person person = personRepo.findById(request.getPersonId())
-//                .orElseThrow(() -> new RuntimeException("Person not found"));
+        Person person = personRepo.findById(request.getPersonId())
+                .orElseThrow(() -> new RuntimeException("Person not found"));
 
         TransactionRecord txn = new TransactionRecord();
         txn.setTransactionId(IdGenerator.generateId()); // your TXID logic
-//        txn.setPerson(person);
+        txn.setPerson(person);
         txn.setAmount(request.getAmount());
         txn.setAmountRepaid(BigDecimal.ZERO);
         txn.setTransactionDate(LocalDate.now());
@@ -51,8 +51,7 @@ public class TransactionServiceImpl implements TransactionService {
         txn.setPaymentMode(request.getPaymentMode());
         txn.setCategory(request.getCategory());
         txn.setTransactionNo(request.getTransactionNo());
-        txn.setFromPersonId(request.getFromPersonId());
-        txn.setToPersonId(request.getToPersonId());
+        txn.setUser_id(request.getUserId());
 
         TransactionRecord transactionRecord = transactionRepo.save(txn);
         TransactionResponse transactionResponse = transactionMapper.toDto(transactionRecord);
@@ -178,4 +177,59 @@ public class TransactionServiceImpl implements TransactionService {
                 .map(this::mapToResponse)
                 .toList();
     }
+
+
+/*
+    public List<TransactionResponse>
+    getTransactions(Long loggedInUserId) {
+
+        List<TransactionRecord> transactions =
+                repository.getUserTransactions(
+                        loggedInUserId
+                );
+
+        return transactions.stream()
+
+                .map(transaction -> {
+
+                    boolean isOwner =
+                            transaction
+                                    .getOwnerUser()
+                                    .getId()
+                                    .equals(loggedInUserId);
+
+                    TransactionType displayType =
+                            transformType(
+                                    transaction.getType(),
+                                    isOwner
+                            );
+
+                    TransactionResponse response =
+                            new TransactionResponse();
+
+                    response.setId(
+                            transaction.getId()
+                    );
+
+                    response.setPersonName(
+                            transaction
+                                    .getPerson()
+                                    .getName()
+                    );
+
+                    response.setType(displayType);
+
+                    response.setAmount(
+                            transaction.getAmount()
+                    );
+
+                    response.setOwner(isOwner);
+
+                    return response;
+                })
+
+                .toList();
+    }
+
+ */
 }

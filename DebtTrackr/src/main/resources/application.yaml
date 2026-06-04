@@ -69,6 +69,27 @@ spring:
           starttls:
             enable: true
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id:
+            client-secret:
+            scope:
+              - email
+              - profile
+    authentication:
+      jwt:
+        base64-secret: ZN9dDRNEbcyKe3c8aZ5MebkzODMbH1cNyL1ORXOH1N5407MUp8cVHq6xdadZCCYvX+1SK6vFra4XLKhyA/5aXg==
+        token-validity-in-seconds: 86400
+  data:
+    redis:
+      host: localhost
+      port: 6379
+#      database: 0
+      # password: yourPassIfAny
+
 server:
   port: 8989
   error:

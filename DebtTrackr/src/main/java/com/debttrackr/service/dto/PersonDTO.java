@@ -4,8 +4,10 @@ import com.debttrackr.domain.enumeration.Relation;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class PersonDTO {
+public class PersonDTO implements Serializable {
     private Long id;
     private String name;
     private String email;
