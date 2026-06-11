@@ -1,5 +1,7 @@
 package com.debttrackr.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,8 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Auth APIs", description = "Login and Register")
+
 public class AuthController {
 
 
@@ -19,13 +23,12 @@ public class AuthController {
         }
 
     @GetMapping("/google")
+    @Hidden  // it's hide endpoints info in swagger
     public void googleLogin(
             HttpServletResponse response)
             throws IOException {
 
-        response.sendRedirect(
-                "/oauth2/authorization/google"
-        );
+        response.sendRedirect("/oauth2/authorization/google");
     }
 
 }
